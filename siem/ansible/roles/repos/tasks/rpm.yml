@@ -6,3 +6,7 @@
   copy:
     src: ../files/rpm-elasticsearch.repo
     dest: /etc/yum.repos.d/elasticsearch.repo
+- name: Configure Rsyslog repository file
+  copy:
+    src: ../files/rpm-rsyslog.repo
+    dest: /etc/yum.repos.d/rsyslog.repo

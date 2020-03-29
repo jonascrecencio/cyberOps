@@ -11,3 +11,7 @@
   package:
     name: 'apt-transport-https'
     state: present
+- name: Configure Rsyslog repository file
+  copy:
+    src: ../files/deb-rsyslog.list
+    dest: /etc/apt/sources.list.d/rsyslog.list
