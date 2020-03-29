@@ -1,9 +1,15 @@
 ---
-- name: Install ELK prerequiste
+- name: Install lastest OpenJDK
   yum:
     name: java-11-openjdk
     update_cache: yes
     state: latest
+  when: run_latest_update
+- name: Ensure OpenJDK is installed
+  yum:
+    name: java-11-openjdk
+    update_cache: yes
+    state: present
 - name: Install latest Elastic Stack
   yum:
     name:
