@@ -1,0 +1,10 @@
+all:
+  children:
+    azure:
+      hosts:
+        elk01.cyberops.local:
+          ansible_host: 192.0.2.10
+        elk02.cyberops.local:
+          ansible_host: 192.0.2.20
+        elk03.cyberops.local:
+          ansible_host: 192.0.2.30
