@@ -1,5 +1,5 @@
 ---
-- name: Install ELK pre-reqs
+- name: Install ELK prerequiste
   apt:
     name: openjdk-11-jdk
     update_cache: yes

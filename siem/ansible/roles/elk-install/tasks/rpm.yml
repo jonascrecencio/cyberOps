@@ -1,5 +1,5 @@
 ---
-- name: Install ELK pre-reqs
+- name: Install ELK prerequiste
   yum:
     name: java-11-openjdk
     update_cache: yes
