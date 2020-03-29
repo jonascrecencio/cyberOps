@@ -1,11 +1,19 @@
 ---
-- name: Install latest Elastic Search
+- name: Install latest Elastic Stack
   apt:
-    name: 'elasticsearch'
+    name:
+      - 'elasticsearch'
+      - 'logstash'
+      - 'kibana'
+      - 'filebeat'
     update_cache: yes
     state: latest
   when: run_latest_update
-- name: Ensure Elastic Search is installed
+- name: Ensure Elastic Stack is installed
   package:
-    name: 'elasticsearch'
+    name:
+      - 'elasticsearch'
+      - 'logstash'
+      - 'kibana'
+      - 'filebeat'
     state: present
