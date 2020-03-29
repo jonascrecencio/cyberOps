@@ -1,0 +1,11 @@
+---
+- name: Install latest Elastic Search
+  apt:
+    name: 'elasticsearch'
+    update_cache: yes
+    state: latest
+  when: run_latest_update
+- name: Ensure Elastic Search is installed
+  package:
+    name: 'elasticsearch'
+    state: present
