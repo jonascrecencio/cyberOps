@@ -1,0 +1,10 @@
+---
+- name: Install latest Elastic Search
+  package:
+    name: 'elasticsearch'
+    state: latest
+  when: run_latest_update
+- name: Ensure Elastic Search is installed
+  package:
+    name: 'elasticsearch'
+    state: present

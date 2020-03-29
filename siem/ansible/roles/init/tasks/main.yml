@@ -1,0 +1,8 @@
+---
+- name: Update system packages
+  package:
+    name: '*'
+    state: latest
+  when: run_latest_update
+- name: Set up hostname
+  hostname: "{{ inventory_hostname }}"

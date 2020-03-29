@@ -1,0 +1,13 @@
+---
+- name: Import Elasticsearch PGP Key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+- name: Configure repository file
+  copy:
+    src: ../files/deb-elasticsearch.list
+    dest: /etc/apt/sources.list.d/elastic-7.x.list
+- name: Install apt-transport-https
+  package:
+    name: 'apt-transport-https'
+    state: present
