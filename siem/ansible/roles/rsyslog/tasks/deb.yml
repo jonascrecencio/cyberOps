@@ -1,0 +1,12 @@
+---
+- name: Install latest Rsyslog
+  apt:
+    name: 'rsyslog'
+    update_cache: yes
+    state: latest
+  when: run_latest_update
+- name: Ensure Rsyslog is installed
+  apt:
+    name: 'rsyslog'
+    update_cache: yes
+    state: present

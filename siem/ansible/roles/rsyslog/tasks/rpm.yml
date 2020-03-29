@@ -1,0 +1,12 @@
+---
+- name: Install latest Rsyslog
+  yum:
+    name: 'rsyslog'
+    update_cache: yes
+    state: latest
+  when: run_latest_update
+- name: Ensure Rsyslog is installed
+  yum:
+    name: 'rsyslog'
+    update_cache: yes
+    state: present
