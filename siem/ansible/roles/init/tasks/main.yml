@@ -5,4 +5,5 @@
     state: latest
   when: run_latest_update
 - name: Set up hostname
-  hostname: "{{ inventory_hostname }}"
+  hostname:
+    name: "{{ inventory_hostname }}"
