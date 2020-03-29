@@ -3,3 +3,18 @@
   when: ansible_facts['os_family'] == "RedHat"
 - import_tasks: tasks/deb.yml
   when: ansible_facts['os_family'] == "Debian"
+- name: Enable UDP Syslog Reception
+  lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: '^#$ModLoad imudp'
+    line: '$ModLoad imudp'
+- name: Configure 514 UDP Port
+  lineinfile:
+    path: /etc/rsyslog.conf
+    regexp: '^#$UDPServerRun 514'
+    line: '$UDPServerRun 514'
+- name: Enable and restart Rsyslog
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: yes
