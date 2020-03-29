@@ -6,6 +6,9 @@
   copy:
     src: ../files/rpm-elasticsearch.repo
     dest: /etc/yum.repos.d/elasticsearch.repo
+- name: Import Rsyslog PGP Key
+  rpm_key:
+    key: http://rpms.adiscon.com/RPM-GPG-KEY-Adiscon
 - name: Configure Rsyslog repository file
   copy:
     src: ../files/rpm-rsyslog.repo
