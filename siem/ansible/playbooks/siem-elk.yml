@@ -8,6 +8,7 @@
     - ../roles/repos
     - ../roles/elk-install
     - ../roles/rsyslog
+    - ../roles/elk-config
   
   vars_files:
     - ../vars/main.yml

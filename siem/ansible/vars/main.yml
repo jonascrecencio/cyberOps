@@ -1,1 +1,7 @@
 run_latest_update: true
+cluster_name: siem
+data_path: /var/lib/elasticsearch
+log_path: /var/log/elasticsearch
+listen_address: 0.0.0.0
+listen_port: 9200
+discovery_nodes: ["10.0.2.5:9300","10.0.4.4:9300","10.0.2.4:9300","10.0.3.4:9300"]

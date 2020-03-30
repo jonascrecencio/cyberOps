@@ -1,0 +1,14 @@
+---
+- name: Configure Elastic Search
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '{{ item.re }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { re: '^#cluster.name:', line: 'cluster.name: {{ cluster_name }}' }
+    - { re: '^#node.name:', line: 'node.name: {{ inventory_hostname }}' }
+    - { re: '^path.data:', line: 'path.data: {{ data_path }}' }
+    - { re: '^path.logs:', line: 'path.logs: {{ log_path }}' }
+    - { re: '^#network.host:', line: 'network.host: {{ listen_address }}' }
+    - { re: '^#http.port:', line: 'http.port: {{ listen_port }}' }
+    - { re: '^#discovery.seed_hosts:', line: 'discovery.seed_hosts: {{ discovery_nodes }}' }
