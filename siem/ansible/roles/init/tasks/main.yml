@@ -7,3 +7,14 @@
 - name: Set up hostname
   hostname:
     name: "{{ inventory_hostname }}"
+- name: Register hostname
+  command: "hostname"
+  register: hostname 
+- name: Register shortname
+  command: "hostname -s"
+  register: shortname
+- name: Setup /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ hostvars[item]['local_address'] }} {{ hostvars[item]['shortname']['stdout'] }} {{ hostvars[item]['hostname']['stdout'] }}"
+  with_items: "{{ groups['all'] }}"
