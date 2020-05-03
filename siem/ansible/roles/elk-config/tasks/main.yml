@@ -5,10 +5,52 @@
     regexp: '{{ item.re }}'
     line: '{{ item.line }}'
   with_items:
-    - { re: '^#cluster.name:', line: 'cluster.name: {{ cluster_name }}' }
-    - { re: '^#node.name:', line: 'node.name: {{ inventory_hostname }}' }
-    - { re: '^path.data:', line: 'path.data: {{ data_path }}' }
-    - { re: '^path.logs:', line: 'path.logs: {{ log_path }}' }
-    - { re: '^#network.host:', line: 'network.host: {{ listen_address }}' }
-    - { re: '^#http.port:', line: 'http.port: {{ listen_port }}' }
-    - { re: '^#discovery.seed_hosts:', line: 'discovery.seed_hosts: {{ discovery_nodes }}' }
+    - { re: '^#? ?cluster.name:', line: 'cluster.name: {{ cluster_name }}' }
+    - { re: '^#? ?node.name:', line: 'node.name: {{ inventory_hostname }}' }
+    - { re: '^#? ?path.data:', line: 'path.data: {{ elastic_data_path }}' }
+    - { re: '^#? ?path.logs:', line: 'path.logs: {{ elastic_log_path }}' }
+    - { re: '^#? ?network.host:', line: 'network.host: {{ listen_address }}' }
+    - { re: '^#? ?http.port:', line: 'http.port: {{ elastic_listen_port }}' }
+    - { re: '^#? ?discovery.seed_hosts:', line: 'discovery.seed_hosts: {{ discovery_nodes }}' }
+- name: Enable and restart Elastic Search
+  service:
+    name: elasticsearch
+    state: restarted
+    enabled: yes
+- name: Configure Logstash
+  lineinfile:
+    path: /etc/logstash/logstash.yml
+    regexp: '{{ item.re }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { re: '^#? ?path.data:', line: 'path.data: {{ logstash_data_path }}' }
+    - { re: '^#? ?pipeline.id:', line: 'pipeline.id: {{ inventory_hostname }}' }
+    - { re: '^#? ?http.host:', line: 'http.host: {{ listen_address }}' }
+    - { re: '^#? ?path.logs:', line: 'path.logs: {{ logstash_log_path }}' }
+    - { re: '^#? ?xpack.monitoring.enabled:', line: 'xpack.monitoring.enabled: {{ logstash_enable_xpack_monitoring }}' }
+    - { re: '^#? ?xpack.monitoring.elasticsearch.username:', line: 'xpack.monitoring.elasticsearch.username: {{ logstash_xpack_username }}' }
+    - { re: '^#? ?xpack.monitoring.elasticsearch.password:', line: 'xpack.monitoring.elasticsearch.password: {{ logstash_xpack_password }}' }
+    - { re: '^#? ?xpack.monitoring.elasticsearch.hosts:', line: 'xpack.monitoring.elasticsearch.hosts: {{ elastic_instances_url }}' }
+    - { re: '^#? ?xpack.monitoring.collection.interval:', line: 'xpack.monitoring.collection.interval: {{ logstash_xpack_collection_interval }}' }
+- name: Enable and restart Logstash
+  service:
+    name: logstash
+    state: restarted
+    enabled: yes
+- name: Configure Kibana
+  lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '{{ item.re }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { re: '^#? ?server.port:', line: 'server.port: {{ kibana_listen_port }}' }
+    - { re: '^#? ?server.host:', line: 'server.host: {{ listen_address }}' }
+    - { re: '^#? ?elasticsearch.hosts:', line: 'elasticsearch.hosts: {{ elastic_instances_url }}' }
+    - { re: '^#? ?elasticsearch.requestTimeout:', line: 'elasticsearch.requestTimeout: {{ kibana_elastic_req_timeout }}' }
+    - { re: '^#? ?elasticsearch.shardTimeout:', line: 'elasticsearch.shardTimeout: {{ kibana_elastic_shard_timeout }}' }
+    - { re: '^#? ?elasticsearch.startupTimeout:', line: 'elasticsearch.startupTimeout: {{ kibana_elastic_startup_timeout }}' }
+- name: Enable and restart Kibana
+  service:
+    name: kibana
+    state: restarted
+    enabled: yes
