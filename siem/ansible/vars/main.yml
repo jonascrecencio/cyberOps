@@ -4,6 +4,7 @@ listen_address: 0.0.0.0
 elastic_listen_port: 9200
 discovery_nodes: ["10.0.1.4:9300","10.0.1.5:9300","10.0.1.6:9300"]
 elastic_instances_url: ["http://10.0.1.4:9200","http://10.0.1.5:9200","http://10.0.1.6:9200"]
+elastic_master_eligible_hosts: ["10.0.1.4","10.0.1.5","10.0.1.6"]
 elastic_data_path: /var/lib/elasticsearch
 elastic_log_path: /var/log/elasticsearch
 logstash_data_path: /var/lib/logstash

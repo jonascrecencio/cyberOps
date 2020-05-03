@@ -12,6 +12,7 @@
     - { re: '^#? ?network.host:', line: 'network.host: {{ listen_address }}' }
     - { re: '^#? ?http.port:', line: 'http.port: {{ elastic_listen_port }}' }
     - { re: '^#? ?discovery.seed_hosts:', line: 'discovery.seed_hosts: {{ discovery_nodes }}' }
+    - { re: '^#? ?cluster.initial_master_nodes:', line: 'cluster.initial_master_nodes: {{ elastic_master_eligible_hosts }}' }
 - name: Enable and restart Elastic Search
   service:
     name: elasticsearch
