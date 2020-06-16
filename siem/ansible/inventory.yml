@@ -3,11 +3,11 @@ all:
     azure:
       hosts:
         srv-elk-01.cyberops.local:
-          ansible_host: 52.183.12.44
+          ansible_host: srv-elk01.westus2.cloudapp.azure.com
           local_address: 10.0.1.4
         srv-elk-02.cyberops.local:
-          ansible_host: 13.66.184.122
+          ansible_host: srv-elk02.westus2.cloudapp.azure.com
           local_address: 10.0.1.5
         srv-elk-03.cyberops.local:
-          ansible_host: 52.183.6.131
+          ansible_host: srv-elk03.westus2.cloudapp.azure.com
           local_address: 10.0.1.6
