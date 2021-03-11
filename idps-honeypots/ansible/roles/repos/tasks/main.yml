@@ -1,0 +1,19 @@
+---
+- name: Configurando repositório EPEL
+  yum:
+    name: epel-release
+    update_cache: yes
+    state: latest
+- name: Configurando repositórios do docker - docker-ce-stable
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable - $basearch
+    file: docker-ce
+    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+- name: Configurando repositório do Kubernetes
+  copy:
+    src: ../files/kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo

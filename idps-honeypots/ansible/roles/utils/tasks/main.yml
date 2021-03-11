@@ -1,0 +1,13 @@
+---
+- name: Instalando ferramentas básicas
+  yum:
+    name:
+      - vim
+      - net-tools
+      - tcpdump
+      - nmap
+      - mtr
+      - htop
+      - python3-pip
+      - "@Development tools"
+    state: latest

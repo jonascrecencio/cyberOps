@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  snort3:
+    image: jonascrecencio/snort3
+    container_name: snort3
+    volumes:
+      - /stor/docker/snort3/volumes/etc/:/usr/local/snort/etc/
+      - /stor/docker/snort3/volumes/rules/:/usr/local/snort/rules/
+      - /stor/docker/snort3/volumes/appid/:/usr/local/snort/appid/
+      - /stor/docker/snort3/volumes/intel/:/usr/local/snort/intel/
+      - /stor/docker/snort3/volumes/log/:/var/log/snort/
+    network_mode: "host"

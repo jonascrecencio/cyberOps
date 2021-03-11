@@ -1,0 +1,26 @@
+---
+- name: Instalando docker
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    update_cache: yes
+    disable_gpg_check: yes
+    state: latest
+- name: Instalando docker-compose
+  pip:
+    name: docker-compose
+- name: Criando link simbólico docker-compose
+  file:
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    state: link
+- name: Habilitando o docker na inicialização do sistema
+  systemd:
+    name: docker
+    enabled: yes
+- name: Executando o docker
+  systemd:
+    name: docker
+    state: started

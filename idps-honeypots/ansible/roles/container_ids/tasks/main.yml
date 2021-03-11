@@ -1,0 +1,25 @@
+---
+- name: Cria diretório de volume do container
+  file:
+    path: /stor/docker/snort3/volumes/
+    state: directory
+- name: Configura volumes
+  unarchive:
+    src: ../files/snort-config.tar.gz
+    dest: /stor/docker/snort3/volumes/
+- name: Cria docker-compose do container
+  copy:
+    src: ../files/docker-compose.yml
+    dest: /stor/docker/snort3/
+- name: Criando Unit do Systemd para o Snort3
+  template:
+    src: "../files/snort3.service"
+    dest: "/etc/systemd/system/snort3.service"
+- name: Habilitando Snort3 na inicialização do sistema
+  systemd:
+    name: snort3
+    enabled: yes
+- name: Realizando deploy dos containers
+  systemd:
+    name: snort3
+    state: restarted

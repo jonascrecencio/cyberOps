@@ -1,0 +1,20 @@
+[Unit]
+Description=Snort3
+Requires=docker.service
+
+[Service]
+Restart=always
+
+WorkingDirectory=/stor/docker/snort3/
+
+# Shutdown container (if running) when unit is stopped
+ExecStartPre=/usr/bin/docker-compose down -v
+
+# Start container when unit is started
+ExecStart=/usr/bin/docker-compose up
+
+# Stop container when unit is stopped
+ExecStop=/usr/bin/docker-compose down -v
+
+[Install]
+WantedBy=multi-user.target

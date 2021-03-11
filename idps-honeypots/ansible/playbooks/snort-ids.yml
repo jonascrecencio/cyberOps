@@ -1,0 +1,15 @@
+---
+- name: Snort 3 IDS Deploy
+  hosts: all
+  become: yes
+
+  roles:
+    - ../roles/init
+    - ../roles/repos
+    - ../roles/utils
+    - ../roles/docker
+    - ../roles/container_ids
+    - ../roles/tpot
+  
+  vars_files:
+    - ../vars/main.yml
