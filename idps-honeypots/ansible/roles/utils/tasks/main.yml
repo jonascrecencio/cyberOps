@@ -8,6 +8,10 @@
       - nmap
       - mtr
       - htop
+      - git
       - python3-pip
-      - "@Development tools"
     state: latest
+    update_cache: yes
+- name: Instala componente pip
+  pip:
+    name: passlib

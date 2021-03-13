@@ -3,8 +3,10 @@ all:
     aws:
       hosts:
         srv-idps-hp-01.cybersec.local:
-          ansible_host: 54.196.232.252
-          ansible_user: 'centos'
+          ansible_host: 3.228.19.182
+          ansible_port: 64295
+          ansible_user: 'admin'
           ansible_ssh_private_key_file: '~/Documentos/cloud/hp-keys.pem'
-          local_address: 172.19.0.191
-          mode: 'master-init'
+          local_address: 172.19.0.250
+          webuser_password: semprelinux
+          admin_password: semprelinux

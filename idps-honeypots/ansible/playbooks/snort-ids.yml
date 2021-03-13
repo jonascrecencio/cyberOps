@@ -5,10 +5,10 @@
 
   roles:
     - ../roles/init
-    - ../roles/repos
+    #- ../roles/repos
     - ../roles/utils
-    - ../roles/docker
-    - ../roles/container_ids
+    #- ../roles/docker
+    #- ../roles/container_ids
     - ../roles/tpot
   
   vars_files:

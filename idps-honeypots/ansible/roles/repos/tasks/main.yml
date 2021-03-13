@@ -1,19 +1,19 @@
 ---
-- name: Configurando repositório EPEL
-  yum:
-    name: epel-release
+- name: Instalando dependências de instalação do Docker
+  package:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
     update_cache: yes
-    state: latest
-- name: Configurando repositórios do docker - docker-ce-stable
-  yum_repository:
-    name: docker-ce-stable
-    description: Docker CE Stable - $basearch
-    file: docker-ce
-    baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
-    enabled: yes
-    gpgcheck: yes
-    gpgkey: https://download.docker.com/linux/centos/gpg
-- name: Configurando repositório do Kubernetes
-  copy:
-    src: ../files/kubernetes.repo
-    dest: /etc/yum.repos.d/kubernetes.repo
+- name: Importando Apt Key GPG do Docker
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+- name: Adiciona repositório do Docker
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian buster stable
+    state: present

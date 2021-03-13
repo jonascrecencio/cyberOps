@@ -7,15 +7,15 @@
   git:
     repo: "https://github.com/telekom-security/tpotce.git"
     dest: /stor/tpot/
-- name: Copiando arquivo de configuração
+- name: Criando arquivo de configuração de instalação
   template:
-    src: /stor/tpot/tpotce/iso/installer/tpot.conf.dist
+    src: tpot.conf.j2
     dest: /root/tpot.conf
     owner: root
     group: root
     mode: 0644
 - name: Instalando T-Pot - pode levar 15min à 30min
-  command: /stor/tpot/tpotce/iso/installer/install.sh --type=auto --conf=/root/tpot.conf
+  command: /stor/tpot/iso/installer/install.sh --type=auto --conf=/root/tpot.conf
 - name: Remove arquivo de configuração do T-Pot
   file:
     path: /root/tpot.conf
@@ -28,3 +28,17 @@
         "--force-confdef";
         "--force-confold";
       }
+- name: Altera senha do usuário admin
+  user:
+    name: admin
+    password: "{{ admin_password|password_hash('sha512') }}"
+    update_password: always
+- name: Habilita ssh password auth
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication yes'
+- name: Reiniciando sshd
+  systemd:
+    name: sshd
+    state: restarted

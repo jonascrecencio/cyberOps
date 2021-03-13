@@ -1,12 +1,11 @@
 ---
-- name: Instalando docker
-  yum:
+- name: Instalando Docker
+  apt:
     name:
       - docker-ce
       - docker-ce-cli
       - containerd.io
     update_cache: yes
-    disable_gpg_check: yes
     state: latest
 - name: Instalando docker-compose
   pip:
