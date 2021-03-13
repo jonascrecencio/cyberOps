@@ -5,11 +5,9 @@
 
   roles:
     - ../roles/init
-    #- ../roles/repos
     - ../roles/utils
-    #- ../roles/docker
-    #- ../roles/container_ids
     - ../roles/tpot
-  
+    - ../roles/container_ids
+
   vars_files:
     - ../vars/main.yml
