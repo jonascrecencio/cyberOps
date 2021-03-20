@@ -3,10 +3,10 @@ all:
     aws:
       hosts:
         srv-idps-hp-01.cybersec.local:
-          ansible_host: 3.228.19.182
-          ansible_port: 64295
+          ansible_host: 3.210.197.10
+          ansible_port: 22
           ansible_user: 'admin'
           ansible_ssh_private_key_file: '~/Documentos/cloud/hp-keys.pem'
-          local_address: 172.19.0.250
+          local_address: 172.19.0.137
           webuser_password: LINUX@4ever
           admin_password: LINUX@4ever
